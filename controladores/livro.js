@@ -1,4 +1,4 @@
-const { getTodosLivros, getLivroPorId } = require("../servicos/livro")
+const { getTodosLivros, getLivroPorId, insereLivro } = require("../servicos/livro")
 
 function getLivros(req, res) {
         try {
@@ -21,7 +21,20 @@ function getLivro(req, res) {
     }
 }
 
+function postLivro(req, res) {
+    try {
+        const livroNovo = req.body //O req.body retorna o q vc inserido, ou seja, os parametros dentro do JSON
+        insereLivro(livroNovo)
+        res.status(201)
+        res.send("Livro inserido com sucesso")
+    } catch (error) {
+        res.status(500)
+        res.send(error.messsage)
+    }
+}
+
 module.exports = { //Exporta o arquivo e deixar aberto para outras pessoas checarem
     getLivros,
-    getLivro
+    getLivro,
+    postLivro
 }

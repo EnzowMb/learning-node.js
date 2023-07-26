@@ -1,7 +1,7 @@
 const fs = require("fs")
 
 function getTodosLivros() {
-    JSON.parse(fs.readFileSync("livros.json"))
+    return JSON.parse(fs.readFileSync("livros.json"))
 }
 
 function getLivroPorId(id) {
@@ -15,7 +15,19 @@ function getLivroPorId(id) {
     return livroFiltrado
 }
 
+function insereLivro(livroNovo) {
+    const livros = JSON.parse(fs.readFileSync("livros.json"))
+
+    const novaListaDeLivros = [ ...livros, livroNovo ]
+    //ESSE CONCEITO DE COLOCAR [ ...listaAntiga, listaNova], onde os ...Nome é qual
+    //lista vc quer incluir algo, e o , livroNovo é o q vc vai inserir
+    //Isso chama spread
+
+    fs.writeFileSync("livros.json", JSON.stringify(novaListaDeLivros))
+}
+
 module.exports = {
     getTodosLivros,
-    getLivroPorId
+    getLivroPorId,
+    insereLivro
 }
