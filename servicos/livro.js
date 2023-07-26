@@ -26,8 +26,30 @@ function insereLivro(livroNovo) {
     fs.writeFileSync("livros.json", JSON.stringify(novaListaDeLivros))
 }
 
+function modificaLivro(modificacoes, id) {
+    let livrosAtuais = JSON.parse(fs.readFileSync("livros.json"))
+
+    const indiceModificado = livrosAtuais.findIndex(livro => livro.id === id) //Vai procurar qual livro tem o id que foi recebido por parametro
+
+    const conteudoMudado = { ...livrosAtuais[indiceModificado], ...modificacoes }
+    //Esta seguindo a seguinte logica, de acordo com o exemplo:
+    // livrosAtuais[indiceModificado] -> {id: "2", nome: "livro irado"}
+    // modificacoes -> {nome: "nome mucho legal"}
+    //Atraves do ... (spread) ele vai pegar o q tem digitado nos livrosAtuais e vai modificar de acordo com as modificacoes aplicadas
+    //E se n tinha antes, ELE VAI CRIAR!
+    //Se já existe, ELE MODIFICA
+
+    livrosAtuais[indiceModificado] = conteudoMudado
+    //Ele pega o objeto conteudoMudado, aonde foi criado a string q tem a modificacao
+    //E atribui ao indice de onde achou a ID do livro, fazendo assim a mudança
+    //Apenas o const conteudoMudado acima não basta pra modificar o arquivo, tem q atribuir depois
+
+    fs.writeFileSync("livros.json", JSON.stringify(livrosAtuais))
+}
+
 module.exports = {
     getTodosLivros,
     getLivroPorId,
-    insereLivro
+    insereLivro,
+    modificaLivro
 }
