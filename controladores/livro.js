@@ -34,9 +34,16 @@ function getLivro(req, res) {
 function postLivro(req, res) {
     try {
         const livroNovo = req.body //O req.body retorna o q vc inserido, ou seja, os parametros dentro do JSON
-        insereLivro(livroNovo)
-        res.status(201)
-        res.send("Livro inserido com sucesso")
+        
+        if (req.body.nome) { //Verifica se o campo nome existe
+            insereLivro(livroNovo)
+            res.status(201)
+            res.send("Livro inserido com sucesso")
+        } else {
+            res.status(422)
+            res.send("O campo nome é obrigatorio")
+        }
+
     } catch (error) {
         res.status(500)
         res.send(error.messsage)
