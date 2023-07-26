@@ -1,5 +1,5 @@
 const { Router } = require("express") //Ferramenta do Express para criar ROTAS
-const {getLivros, getLivro, postLivro, patchLivro} = require("../controladores/livro")
+const {getLivros, getLivro, postLivro, patchLivro, deleteLivro} = require("../controladores/livro")
 
 const router = Router()
 
@@ -11,8 +11,6 @@ router.post('/', postLivro)
 
 router.patch('/:id', patchLivro)
 
-router.delete('/', (req, res) => {
-    res.send('Tipo DELETE')
-})
+router.delete('/:id', deleteLivro)
 
 module.exports = router //Exporta  o router para os outros arquivos que querem usa-ló
