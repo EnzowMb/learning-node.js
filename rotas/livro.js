@@ -18,5 +18,4 @@ router.patch('/', (req, res) => {
 router.delete('/', (req, res) => {
     res.send('Tipo DELETE')
 })
-
 module.exports = router //Exporta  o router para os outros arquivos que querem usa-ló
