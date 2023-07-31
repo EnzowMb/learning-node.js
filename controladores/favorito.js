@@ -2,7 +2,7 @@ const { getTodosFavoritos, insereFavorito, deletaFavoritoPorId } = require("../s
 
 function getFavoritos(req, res) {
     try {
-        const livros = getTodosFavoritos
+        const livros = getTodosFavoritos()
         res.send(livros)
     } catch (error) {
         res.status(500)
